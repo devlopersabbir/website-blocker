@@ -1,0 +1,32 @@
+{
+  "name": "Extension Name",
+  "description": "Extension description with only 132 word",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "default title",
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon.png",
+      "24": "icon.png",
+      "32": "icon.png"
+    }
+  },
+  "permissions": ["storage"],
+  "icons": {
+    "128": "icon.png",
+    "16": "icon.png",
+    "256": "icon.png",
+    "48": "icon.png"
+  },
+  "background": {
+    "service_worker": "src/background/background.ts"
+  },
+  "content_scripts": [
+    {
+      "js": ["src/content/content.ts"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_page": "src/options/index.html"
+}

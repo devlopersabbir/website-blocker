@@ -1,18 +1,17 @@
 {
-  "name": "Extension Name",
-  "description": "Extension description with only 132 word",
+  "name": "Website Blocker",
+  "description": "Fully customizable website blocker google chrome extension",
   "version": "0.0.1",
   "manifest_version": 3,
   "action": {
     "default_title": "default title",
-    "default_popup": "index.html",
     "default_icon": {
       "16": "icon.png",
       "24": "icon.png",
       "32": "icon.png"
     }
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "declarativeNetRequest", "scripting", "activeTab"],
   "icons": {
     "128": "icon.png",
     "16": "icon.png",
@@ -25,7 +24,8 @@
   "content_scripts": [
     {
       "js": ["src/content/content.ts"],
-      "matches": ["<all_urls>"]
+      "matches": ["<all_urls>"],
+      "run_at": "document_end"
     }
   ],
   "options_page": "src/options/index.html"

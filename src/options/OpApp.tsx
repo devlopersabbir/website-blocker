@@ -22,7 +22,7 @@ import { toast } from "react-hot-toast";
 
 const OpApp = () => {
   const [website, setWebsite] = useState<string>("");
-  const [weblists, setWeblists] = useState([]);
+  const [weblists, setWeblists] = useState<Array<any>>([]);
   const [prevPassword, setPrevPassword] = useState<string>("");
   const [pass1, setPass1] = useState<string>("");
   const [pass2, setPass2] = useState<string>("");
@@ -30,9 +30,12 @@ const OpApp = () => {
   const addWebsite = async () => {
     if (!website) return toast.error("Please input website URL!");
     try {
-      const { websites: oldArray } = await chrome.storage.sync.get("websites");
+      const { websites: oldArray }: any = await chrome.storage.sync.get(
+        "websites"
+      );
+      console.log("old array: ", oldArray);
 
-      const newLists = [...oldArray, website];
+      const newLists: any = [...(oldArray || ""), website];
       await chrome.storage.sync.set({ websites: newLists });
       setWeblists(newLists as any);
       setWebsite("");
@@ -45,7 +48,7 @@ const OpApp = () => {
   useEffect(() => {
     const getWebLists = async () => {
       const { websites } = await chrome.storage.sync.get("websites");
-      setWeblists(websites);
+      setWeblists(websites || []);
     };
     const getPrevPassword = async () => {
       const { password } = await chrome.storage.sync.get("password");
@@ -56,10 +59,10 @@ const OpApp = () => {
   }, []);
 
   const removeItem = async (item: string) => {
-    setWeblists((prev) => prev.filter((i) => i !== item));
-    await chrome.storage.sync
-      .set({ websites: weblists })
-      .then(() => toast.success(`${item} removed!`));
+    const updatedWeblists = weblists.filter((i) => i !== item);
+    setWeblists(updatedWeblists);
+    await chrome.storage.sync.set({ websites: updatedWeblists });
+    toast.success(`${item} removed!`);
   };
 
   const handleChange = () => {
@@ -67,14 +70,25 @@ const OpApp = () => {
       if (prevPassword !== pass1) {
         return toast.error("Password doesn't match.");
       }
+      if (pass2 !== pass3) return toast.error("Not match!");
+      chrome.storage.sync
+        .set({ password: pass3 })
+        .then(() => toast.success(`"${pass3}" is now master password!`));
+    } else {
+      if (pass2 !== pass3) return toast.error("Not match!");
+      chrome.storage.sync
+        .set({ password: pass3 })
+        .then(() => toast.success(`"${pass3}" is now master password!`));
     }
   };
+
+  console.log("website list", weblists);
 
   return (
     <Center mt={7} w="full">
       <VStack boxShadow="md" w="container.sm" rounded="xl" p={8}>
         <Heading fontSize="2xl" fontWeight="semibold" pb={3}>
-          Options
+          Setup Extension
         </Heading>
         <Tabs w="full">
           <TabList>

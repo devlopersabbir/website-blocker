@@ -1,4 +1,5 @@
 console.clear();
+import { formatTime } from "../utils/format";
 import { createModal } from "../utils/modal";
 import {
   getPasswordFromStorage,
@@ -82,13 +83,31 @@ const checkPasswordValidity = async () => {
     const currentTime = Date.now();
     console.log("current time: ", currentTime);
     const timeDiff = currentTime - timestamp;
-    const validDuration = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+    const validDuration = 15 * 60 * 1000; // 2 hours in milliseconds
 
     if (timeDiff > validDuration) {
       // Password has expired, show the modal again
       showPasswordPopup();
+    } else {
+      // calclute remaing time
+      let remainingTime = validDuration - timeDiff;
+      // Start updating the countdown every second
+      const countDownInterval = setInterval(() => {
+        console.log("left time", formatTime(remainingTime));
+
+        // Reduce the remaining time by 1 second
+        remainingTime -= 1000;
+
+        if (remainingTime < 0) {
+          // Password has expired, show the modal again
+          clearInterval(countDownInterval);
+          showPasswordPopup();
+        }
+      }, 1000);
+
+      // Initial update of the countdown
+      console.log("init time: ", formatTime(remainingTime));
     }
-    console.log("diff: ", timeDiff);
   }
 };
 

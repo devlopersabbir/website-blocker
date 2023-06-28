@@ -13,17 +13,3 @@ chrome.runtime.onMessage.addListener((message, sender: any, sendResponse) => {
   return true;
 });
 
-// before load website then run code
-// chrome.webRequest.onBeforeRequest.addListener(
-//   (details) => {
-//     const shouldBlock = ["instagram.com"].some((url) =>
-//       details.url.includes(url)
-//     );
-
-//     if (shouldBlock) {
-//       return { cancel: true };
-//     }
-//   },
-//   { urls: ["<all_urls>"] },
-//   ["blocking"]
-// );

@@ -4,14 +4,14 @@
   "version": "0.0.1",
   "manifest_version": 3,
   "action": {
-    "default_title": "default title",
+    "default_title": "Website Blocker",
     "default_icon": {
       "16": "icon.png",
       "24": "icon.png",
       "32": "icon.png"
     }
   },
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "declarativeNetRequest"],
   "icons": {
     "128": "icon.png",
     "16": "icon.png",

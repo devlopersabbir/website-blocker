@@ -8,7 +8,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
       if (website && details.url.includes(website)) {
         chrome.tabs.update(details.tabId, {
           url: chrome.runtime.getURL(
-            `src/block/index.html?name=site-blocked&site=${website}&origin=${details.url}`
+            `/src/block/index.html?name=site-blocked&site=${website}&origin=${details.url}`
           ),
         });
       }

@@ -125,7 +125,7 @@ const OpApp = () => {
                 <Input
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
-                  placeholder="Enter your website url"
+                  placeholder="example.com"
                   type="text"
                 />
                 <IconButton

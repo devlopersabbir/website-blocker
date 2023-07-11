@@ -1,8 +1,39 @@
 {
-  "name": "react-chrome-extension-tools-with-chakra-ui",
-  "private": true,
-  "version": "0.0.0",
+  "name": "website-blocker",
+  "description": "Website blocker google chrome extension",
+  "private": false,
+  "version": "0.0.2",
   "type": "module",
+  "author": {
+    "email": "devlopersabbir@gmail.com",
+    "name": "Sabbir Hossain Shuvo",
+    "url": "https://www.showwcase.com/devlopersabbir"
+  },
+  "repository": {
+    "url": "https://github.com/devlopersabbir/website-blocker"
+  },
+  "bugs": {
+    "email": "devlopersabbir@gmail.com",
+    "url": "https://github.com/devlopersabbir/website-blocker/issues"
+  },
+  "categories": [
+    "Extension Packs"
+  ],
+  "contributors": [
+    {
+      "email": "devlopersabbir@gmail.com",
+      "name": "Sabbir Hossain Shuvo",
+      "url": "https://github.com/devlopersabbir/"
+    }
+  ],
+  "keywords": [
+    "website-blocker",
+    "websiteblocker",
+    "blocker",
+    "website"
+  ],
+  "readme": "https://github.com/devlopersabbir/website-blocker",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

@@ -1,7 +1,8 @@
 {
   "name": "Website Blocker",
   "description": "Fully customizable website blocker google chrome extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "version_name": "Basic",
   "manifest_version": 3,
   "action": {
     "default_title": "Website Blocker",
@@ -26,6 +27,12 @@
       "js": ["src/content/content.ts"],
       "matches": ["<all_urls>"],
       "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/block/index.html"],
+      "matches": ["<all_urls>"]
     }
   ],
   "options_page": "src/options/index.html"

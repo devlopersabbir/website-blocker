@@ -28,11 +28,5 @@
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": [
-    {
-      "resources": ["src/background/blocked.html"],
-      "matches": ["<all_urls>"]
-    }
-  ],
   "options_page": "src/options/index.html"
 }

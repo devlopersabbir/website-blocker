@@ -22,16 +22,10 @@
   "background": {
     "service_worker": "src/background/background.ts"
   },
-  "content_scripts": [
-    {
-      "js": ["src/content/content.ts"],
-      "matches": ["<all_urls>"],
-      "run_at": "document_start"
-    }
-  ],
+
   "web_accessible_resources": [
     {
-      "resources": ["src/blocks/index.html"],
+      "resources": ["index.html"],
       "matches": ["<all_urls>"]
     }
   ],

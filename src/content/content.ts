@@ -115,3 +115,5 @@
 //   // showPasswordPopup();
 //   checkPasswordValidity();
 // }
+
+chrome.runtime.sendMessage("domain");

@@ -31,7 +31,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/block/index.html"],
+      "resources": ["src/blocks/index.html"],
       "matches": ["<all_urls>"]
     }
   ],

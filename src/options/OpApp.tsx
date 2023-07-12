@@ -17,7 +17,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { MdAdd, MdClose } from "react-icons/md";
+import {
+  MdAdd,
+  MdClose,
+  MdDelete,
+  MdSaveAs,
+  MdTurnRight,
+} from "react-icons/md";
 import { toast } from "react-hot-toast";
 
 const OpApp = () => {
@@ -27,6 +33,10 @@ const OpApp = () => {
   const [pass1, setPass1] = useState<string>("");
   const [pass2, setPass2] = useState<string>("");
   const [pass3, setPass3] = useState<string>("");
+  // time pannel
+  const [minute, setMinute] = useState<string>("");
+  const [second, setSecond] = useState<string>("");
+
   const addWebsite = async () => {
     if (!website) return toast.error("Please input website URL!");
     try {
@@ -54,8 +64,16 @@ const OpApp = () => {
       const { password } = await chrome.storage.sync.get("password");
       if (password) setPrevPassword(password);
     };
+    const getTimeFromStorage = async () => {
+      const { times } = await chrome.storage.sync.get("times");
+      if (times) {
+        setMinute(times.split(":")[0]);
+        setSecond(times.split(":")[1]);
+      }
+    };
     getPrevPassword();
     getWebLists();
+    getTimeFromStorage();
   }, []);
 
   const removeItem = async (item: string) => {
@@ -82,7 +100,18 @@ const OpApp = () => {
     }
   };
 
-  console.log("website list", weblists);
+  const saveTime = async () => {
+    if (!minute || !second) return toast.error("Please input minute & second!");
+    const times = `${minute}:${second}`;
+    try {
+      await chrome.storage.sync.set({ times });
+      toast.success(`Time is added! ${times}`);
+    } catch (error) {
+      if (error) {
+        toast.error("Fail to set time!");
+      }
+    }
+  };
 
   return (
     <Center mt={7} w="full">
@@ -95,6 +124,7 @@ const OpApp = () => {
             <Tab>Blocked Websites</Tab>
             <Tab>Add New</Tab>
             <Tab>Settings</Tab>
+            <Tab>Timer Setup</Tab>
           </TabList>
           <TabPanels>
             <TabPanel w="full">
@@ -164,6 +194,41 @@ const OpApp = () => {
                 <Flex justify="flex-end" w="full" mt={3}>
                   <Button onClick={handleChange}>Save changes</Button>
                 </Flex>
+              </Stack>
+            </TabPanel>
+            <TabPanel w="full">
+              <Stack w="full" flexDir="row">
+                <Input
+                  textAlign="center"
+                  type="number"
+                  value={minute}
+                  onChange={(e) => setMinute(e.target.value)}
+                  fontWeight="semibold"
+                />
+                <Input
+                  textAlign="center"
+                  onChange={(e) => setSecond(e.target.value)}
+                  type="number"
+                  value={second}
+                  fontWeight="semibold"
+                />
+                <Stack flexDir="row">
+                  <IconButton
+                    onClick={() => {
+                      setMinute("");
+                      setSecond("");
+                    }}
+                    colorScheme="orange"
+                    aria-label="clearBtn"
+                    icon={<MdDelete />}
+                  />
+                  <IconButton
+                    aria-label="saveBtn"
+                    onClick={saveTime}
+                    colorScheme="telegram"
+                    icon={<MdSaveAs />}
+                  />
+                </Stack>
               </Stack>
             </TabPanel>
           </TabPanels>

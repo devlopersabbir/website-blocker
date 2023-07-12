@@ -17,21 +17,52 @@ import { toast } from "react-hot-toast";
 import {
   getPasswordFromStorage,
   getWebsiteListFromStorage,
+  getTimeFromStroage,
 } from "./utils/service";
 
 const App = () => {
   const [password, setPassword] = useState<string>("");
-
-  const removeDomainName = async (site: string, origin: string) => {
-    console.log("origin: ", origin);
+  const countDownMaker = async () => {
     try {
-      const weblists: [] = (await getWebsiteListFromStorage()) as any;
+      const times = await getTimeFromStroage();
+      const minute = parseInt(times.split(":")[0]);
+      const second = parseInt(times.split(":")[1]);
+      let totalSecond = minute * 60 + second; // output is 140
+
+      console.log(totalSecond); // output is 140
+      const intervalId = setInterval(() => {
+        totalSecond--;
+        console.log(totalSecond);
+        if (totalSecond === 0) {
+          clearInterval(intervalId);
+          console.log("hello", totalSecond);
+        }
+      }, 1000);
+    } catch (error) {
+      if (error) {
+        return toast.error("Time not found!");
+      }
+    }
+  };
+  const removeDomainName = async (site: string, origin: string) => {
+    try {
+      const weblists = await getWebsiteListFromStorage();
       const updatedWeblists = weblists.filter((i: any) => i !== site);
       await chrome.storage.sync.set({ websites: updatedWeblists });
       toast.success(`${site} removed!`);
-      setTimeout(() => {
-        chrome.tabs.update({ url: origin });
-      }, 1000);
+
+      // timer
+      const times = await getTimeFromStroage();
+      const minute = parseInt(times.split(":")[0]);
+      const second = parseInt(times.split(":")[1]);
+      let totalSecond = minute * 60 + second;
+      chrome.tabs.update({ url: origin });
+      const messageDetails = {
+        origin,
+        domain: site,
+        totalSecond,
+      };
+      chrome.runtime.sendMessage(messageDetails);
     } catch (error) {
       if (error) return toast.error("Something went wrong!");
     }

@@ -1,4 +1,4 @@
-export const getPasswordFromStorage = async () => {
+export const getPasswordFromStorage = async (): Promise<string> => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get("password", ({ password }) => {
       if (chrome.runtime.lastError) {
@@ -14,7 +14,23 @@ export const getPasswordFromStorage = async () => {
   });
 };
 
-export const getWebsiteListFromStorage = () => {
+export const getTimeFromStroage = async (): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get("times", ({ times }) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(`${chrome.runtime.lastError}`));
+      } else {
+        if (times) {
+          resolve(times);
+        } else {
+          reject("Times not found!");
+        }
+      }
+    });
+  });
+};
+
+export const getWebsiteListFromStorage = (): Promise<Array<string>> => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get("websites", ({ websites }) => {
       if (chrome.runtime.lastError) {

@@ -22,28 +22,7 @@ import {
 
 const App = () => {
   const [password, setPassword] = useState<string>("");
-  const countDownMaker = async () => {
-    try {
-      const times = await getTimeFromStroage();
-      const minute = parseInt(times.split(":")[0]);
-      const second = parseInt(times.split(":")[1]);
-      let totalSecond = minute * 60 + second; // output is 140
-
-      console.log(totalSecond); // output is 140
-      const intervalId = setInterval(() => {
-        totalSecond--;
-        console.log(totalSecond);
-        if (totalSecond === 0) {
-          clearInterval(intervalId);
-          console.log("hello", totalSecond);
-        }
-      }, 1000);
-    } catch (error) {
-      if (error) {
-        return toast.error("Time not found!");
-      }
-    }
-  };
+  
   const removeDomainName = async (site: string, origin: string) => {
     try {
       const weblists = await getWebsiteListFromStorage();

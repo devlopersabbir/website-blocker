@@ -17,13 +17,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  MdAdd,
-  MdClose,
-  MdDelete,
-  MdSaveAs,
-  MdTurnRight,
-} from "react-icons/md";
+import { MdAdd, MdClose, MdDelete, MdSaveAs } from "react-icons/md";
 import { toast } from "react-hot-toast";
 
 const OpApp = () => {
@@ -51,7 +45,6 @@ const OpApp = () => {
       setWebsite("");
       toast.success(`${website} added to block list!`);
     } catch (error) {
-      console.log(error);
       if (error) return toast.error("Something went wrong!");
     }
   };

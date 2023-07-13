@@ -10,7 +10,8 @@
       "16": "icon.png",
       "24": "icon.png",
       "32": "icon.png"
-    }
+    },
+    "default_popup": "index.html"
   },
   "permissions": ["storage", "activeTab", "webNavigation"],
   "icons": {

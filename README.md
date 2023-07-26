@@ -1,5 +1,5 @@
-<p align="center" width="100px" height="100px">
-  <img src="public/icon.png" alt="Website blocker logo" />
+<p align="center">
+  <img src="public/icon.png" alt="Website blocker logo" width="100px" height="100px" />
 </p>
 
 # Website Blocker Google Chrome extension

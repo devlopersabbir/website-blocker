@@ -1,4 +1,4 @@
-<p align="center" width="100%">
+<p align="center" width="100px" height="100px">
   <img src="public/icon.png" alt="Website blocker logo" />
 </p>
 

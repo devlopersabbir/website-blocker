@@ -7,3 +7,5 @@
 Extension **Version: 0.0.3**
 
 #
+
+## [Download Extension for Chrome](./extension-chrome/dist.zip)

@@ -4,7 +4,15 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   const websiteList = await getWebsiteListFromStorage();
   websiteList &&
     websiteList.find((website) => {
-      if (website && details.url.includes(website)) {
+      const URL = details.url;
+      console.log(URL);
+      ("https://www.facebook.com/");
+      if (
+        (website && URL.endsWith(`https://www.${website}`)) ||
+        URL.endsWith(`https://${website}`) ||
+        URL.endsWith(`https://${website}/`) ||
+        URL.endsWith(`https://www.${website}/`)
+      ) {
         chrome.tabs.update(details.tabId, {
           url: chrome.runtime.getURL(
             `index.html?name=site-blocked&site=${website}&origin=${details.url}`
@@ -28,12 +36,6 @@ chrome.runtime.onMessage.addListener((message) => {
       console.log("old array: ", weblists);
       const newLists: any = [...(weblists || ""), message.domain];
       await chrome.storage.sync.set({ websites: newLists });
-
     }
   }, 1000);
 });
-
-// show badge
-// chrome.runtime.onMessage.addListener((remaingTime) => {
-//   chrome.action.setBadgeText({ text: remaingTime?.remaingTime });
-// });

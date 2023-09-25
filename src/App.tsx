@@ -44,17 +44,15 @@ const App = () => {
       chrome.runtime.sendMessage(messageDetails);
     } catch (error) {
       if (error) {
-        setTimeout(async () => {
-          const times = `05:00`;
-          try {
-            await chrome.storage.sync.set({ times });
-            toast.success(`Default ${times} time added!`);
-          } catch (error) {
-            if (error) {
-              toast.error("Fail to set time!");
-            }
+        const times = `05:00`;
+        try {
+          await chrome.storage.sync.set({ times });
+          toast.success(`Default ${times} time added!`);
+        } catch (error) {
+          if (error) {
+            toast.error("Fail to set time!");
           }
-        }, 800);
+        }
       } else {
         toast.error("Something went wrong!");
       }

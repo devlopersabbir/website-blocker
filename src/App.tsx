@@ -22,7 +22,7 @@ import {
 
 const App = () => {
   const [password, setPassword] = useState<string>("");
-  
+
   const removeDomainName = async (site: string, origin: string) => {
     try {
       const weblists = await getWebsiteListFromStorage();
@@ -43,10 +43,23 @@ const App = () => {
       };
       chrome.runtime.sendMessage(messageDetails);
     } catch (error) {
-      if (error) return toast.error("Something went wrong!");
+      if (error) {
+        setTimeout(async () => {
+          const times = `05:00`;
+          try {
+            await chrome.storage.sync.set({ times });
+            toast.success(`Default ${times} time added!`);
+          } catch (error) {
+            if (error) {
+              toast.error("Fail to set time!");
+            }
+          }
+        }, 800);
+      } else {
+        toast.error("Something went wrong!");
+      }
     }
   };
-
   const unlockBtn = async () => {
     if (!password) return toast.error("Enter the password!");
 

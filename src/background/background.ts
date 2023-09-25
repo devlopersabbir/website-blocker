@@ -25,6 +25,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
 // make timer to update domainlist
 chrome.runtime.onMessage.addListener((message) => {
   let totalSeconds = message.totalSecond;
+  console.log(totalSeconds);
   const intervalId = setInterval(async () => {
     totalSeconds--;
     chrome.action.setBadgeText({ text: `${totalSeconds}` });

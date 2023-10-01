@@ -87,8 +87,8 @@ const App = () => {
     <Box
       w="full"
       h="100vh"
-      bg="linear-gradient(rgba(0, 0, 0, .8) 30%, rgba(0, 0, 0, .1))"
-      bgImage={"https://source.unsplash.com/random"}
+      bg="linear-gradient(rgba(20, 50, 5, 0.8) 30%, rgba(8, 80, 51, 0.8))"
+      // bgImage={"https://source.unsplash.com/random"}
       bgSize="cover"
       bgRepeat="no-repeat"
     >

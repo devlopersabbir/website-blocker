@@ -5,8 +5,6 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   websiteList &&
     websiteList.find((website) => {
       const URL = details.url;
-      console.log(URL);
-      ("https://www.facebook.com/");
       if (
         (website && URL.endsWith(`https://www.${website}`)) ||
         URL.endsWith(`https://${website}`) ||

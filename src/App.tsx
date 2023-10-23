@@ -106,6 +106,7 @@ const App = () => {
         <Center w="full" h={"50vh"}>
           <Flex
             backdropFilter="blur(20px)"
+            bg="gray.900"
             rounded="3xl"
             p={10}
             shadow="2xl"
@@ -127,11 +128,7 @@ const App = () => {
                 placeholder="Enter password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button
-                onClick={unlockBtn}
-                variant="outline"
-                colorScheme="messenger"
-              >
+              <Button onClick={unlockBtn} variant="solid" colorScheme="purple">
                 Unlock
               </Button>
             </VStack>

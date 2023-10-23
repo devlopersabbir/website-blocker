@@ -2,7 +2,7 @@
   "name": "website-blocker",
   "description": "Website blocker google chrome extension",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "author": {
     "email": "devlopersabbir@gmail.com",

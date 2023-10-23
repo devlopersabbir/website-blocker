@@ -8,4 +8,12 @@ Extension **Version: 0.0.3**
 
 #
 
+Extension **Version: 0.0.4**
+
+- Fixed URL checking options
+- Changes Options page UI
+- Updated Blocking page UI
+
+#
+
 ## [Download Extension for Chrome](./extension-chrome/dist.zip)

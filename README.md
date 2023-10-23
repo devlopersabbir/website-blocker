@@ -6,6 +6,10 @@
 
 Extension **Version: 0.0.3**
 
+- Only check domain
+- Removed whole url checking
+- Improve Performance
+
 #
 
 Extension **Version: 0.0.4**
